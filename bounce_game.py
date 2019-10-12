@@ -9,8 +9,22 @@
 import sys
 import pygame
 import random
-pygame.init()
+import time
+import board
+import neopixel
 
+pygame.init()
+pixel_pin = board.D18
+
+# The number of NeoPixels
+num_pixels = 150
+
+# The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
+# For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
+ORDER = neopixel.GRB
+
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels,
+                           brightness=0.8, auto_write=False, pixel_order=ORDER)
 size = width, height = 600, 10
 speed = 2
 black = 0, 0, 0
@@ -20,6 +34,18 @@ score = [0, 0]
 position = 50
 strikezone = 50
 speed_multiplier = 1.5
+
+
+def testBounce():
+    pixels.fill((0, 255, 0))
+    for i in range(num_pixels):
+        time.sleep(.1)
+        pixels[i] = (255, 0, 0)
+        if(i > 0):
+            pixels[i-1] = (0, 255, 0)
+
+
+testBounce()
 
 
 def changePos():
