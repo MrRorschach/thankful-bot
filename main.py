@@ -27,8 +27,6 @@ import speech_recognition as sr
 import pygame as pygame
 
 print("Firing up thankful bot")
-print(sr.__version__)
-
 # pygame.mixer.init()
 # pygame.mixer.music.load("harvard.wav")
 # pygame.mixer.music.play()
@@ -36,18 +34,19 @@ print(sr.__version__)
 
 r = sr.Recognizer()
 
+
 def check_for_thankfulness(a):
-  print("They said:")
-  print(a)
-  if "thank" in a:
-    print("Thank you")
-  else:
-    print("Please say something with the word thank or thankful")
+    print("They said:")
+    print(a)
+    if "thank" in a:
+        print("Thank you")
+    else:
+        print("Please say something with the word thank or thankful")
 
 
 def save_audio_file(a):
-  with open("microphone-results.wav", "wb") as f:
-    f.write(a.get_wav_data())
+    with open("microphone-results.wav", "wb") as f:
+        f.write(a.get_wav_data())
 # Test with recorded file
 # harvard = sr.AudioFile('harvard.wav')
 # with harvard as source:
@@ -55,13 +54,13 @@ def save_audio_file(a):
 #   r.adjust_for_ambient_noise(source)
 #   print(r.recognize_google(audio))
 
-#Microphone Firing up
+
+# Microphone Firing up
 mic = sr.Microphone(device_index=0)
 # print(sr.Microphone.list_microphone_names())
 
 with mic as source:
-  r.adjust_for_ambient_noise(source)
-  audio = r.listen(source)
-  save_audio_file(audio)
-  check_for_thankfulness(r.recognize_google(audio))
-
+    r.adjust_for_ambient_noise(source)
+    audio = r.listen(source)
+    save_audio_file(audio)
+    check_for_thankfulness(r.recognize_google(audio))
